@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <style>
+        body {
+            background-image:url({{url_for('static',filename='sea.png')}});
+            
+            background-repeat: no-repeat;
+            background-size: fill;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Shadow:</h1>
+    Satiety: {{chr["satiety"]}} <br>
+    Drunk: {{chr["drunk"]}} <br>
+    Chill: {{chr["chill"]}} <br>
+    Sport: {{chr["sport"]}} <br>
+
+    <button type="button" style="display:flex; text-align: center; margin: auto; background-color:transparent; border: none; overflow:hidden;"><img src="static/normal_cat.png" background-color: transparent></button>
+
+    <form method="post" action="/drink">
+        <button type="submit" style="display:flex; background-color:transparent; border: none; overflow:hidden; left:80px; top:600px;"><img src="static/mohito.png" background-color: transparent></button>
+    </form>
+                
+    <form method="post" action="/feed">
+        <button type="submit" left:300px; top:600px;"">Feed</button>
+    </form>
+        
+    <form method="post" action="/chill">
+       <button type="submit">Chill</button>
+    </form>
+        
+    <form method="post" action="/sport">
+        <button type="submit">Sport</button>
+    </form>
+</body>
+</html>
