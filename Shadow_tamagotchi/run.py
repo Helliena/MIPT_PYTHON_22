@@ -11,6 +11,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 background = pygame.image.load("sprites_data/background.png")
 pygame.mouse.set_visible(False)
 night = pygame.image.load("sprites_data/night.png")
+update_time = 30
 
 #Cat
 cat = Cat(450, 670)
@@ -32,7 +33,7 @@ cursor_group = pygame.sprite.Group()
 cursor_group.add(cursor)
 
 #Game loop
-while True:
+while(True):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -57,9 +58,10 @@ while True:
     if cat.is_sleeping:
         screen.blit(night, (0, 0))
     
+
     buttons_group.draw(screen)
 
     cursor.update()
     cursor_group.draw(screen)
 
-    clock.tick(30)
+    clock.tick(update_time)

@@ -15,6 +15,8 @@ class Cat(pygame.sprite.Sprite):
     progress_bar_width = 300
     progress_bar_height = 30
 
+    action_time = 20
+
     normal_cat = pygame.image.load("sprites_data/normal_cat.png")
     sad_cat = pygame.image.load("sprites_data/sad_cat.png")
 
@@ -55,7 +57,7 @@ class Cat(pygame.sprite.Sprite):
         self.hunger_progress_bar.draw(surface, (206, 134, 39))
         self.tiredness_progress_bar.draw(surface, (125, 181, 205))
         #check actions and mood:
-        if self.is_sleeping == False:
+        if not(self.is_sleeping):
             if len(self.actions) == 0 :
                 if self.boredom <= self.boredom_threshold or \
                     self.hunger <= self.hunger_threshold or \
@@ -75,17 +77,17 @@ class Cat(pygame.sprite.Sprite):
 
 
     def play(self):
-        if self.is_sleeping == False:
+        if not(self.is_sleeping):
             self.boredom = self.max_char_value
             self.boredom_progress_bar.update(self.boredom)
-            self.actions.append([0, 20])
+            self.actions.append([0, self.action_time])
         
 
     def feed(self):
-        if self.is_sleeping == False:
+        if not(self.is_sleeping):
             self.hunger = self.max_char_value
             self.hunger_progress_bar.update(self.hunger)
-            self.actions.append([1, 20])
+            self.actions.append([1, self.action_time])
     
     def sleep(self):
         self.tiredness = self.max_char_value
@@ -107,8 +109,10 @@ class ProgressBar():
         self.x_pos = x_pos
         self.y_pos = y_pos
         self.max_value = max_val
+
     def update(self, current_val) :
         self.current_percent = current_val / self.max_value 
+    
     def draw(self, surface, color): 
         filled = self.current_percent * self.width
         pygame.draw.rect(surface, color, pygame.Rect(self.x_pos, self.y_pos, filled, self.height))
